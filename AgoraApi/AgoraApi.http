@@ -1,6 +1,0 @@
-@AgoraApi_HostAddress = http://localhost:5114
-
-GET {{AgoraApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

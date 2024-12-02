@@ -1,4 +1,6 @@
+using Application;
 using Carter;
+using Domain;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddOpenApi();
 builder.Services.AddCarter();
+builder.Services.AddApplication();
+builder.Services.AddRepositories();
 
 var app = builder.Build();
 
