@@ -4,9 +4,9 @@ using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation;
+namespace Presentation.Api.V1.Endpoints;
 
-public class ExampleModule : CarterModule
+public class ExampleEndpoint : CarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {

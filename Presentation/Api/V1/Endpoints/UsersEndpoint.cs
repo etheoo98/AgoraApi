@@ -1,4 +1,5 @@
-﻿using Application.Users.GetUserById;
+﻿using Application.Users.Commands.CreateUser;
+using Application.Users.Queries.GetUserById;
 using Ardalis.Result.AspNetCore;
 using Carter;
 using FluentValidation;
@@ -7,12 +8,28 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace Presentation;
+namespace Presentation.Api.V1.Endpoints;
 
-public class UsersModule : CarterModule
+public class UsersEndpoint() : CarterModule("/users")
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
+        app.MapPost("/", async (
+            CreateUserCommand request,
+            IValidator<CreateUserCommand> validator, 
+            ISender sender) =>
+        {
+            var validation = await validator.ValidateAsync(request);
+        
+            if (!validation.IsValid)
+            {
+                return Results.ValidationProblem(validation.ToDictionary());
+            }
+            
+            var result = await sender.Send(request);
+            return result.ToMinimalApiResult();
+        }).WithName("Register");
+        
         app.MapGet("/{id:int}", async (
             int id, 
             IValidator<GetUserByIdQuery> validator, 
