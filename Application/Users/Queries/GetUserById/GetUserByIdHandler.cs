@@ -12,8 +12,7 @@ public class GetUserByIdQueryHandler(IUserRepository repository)
     {
         try
         {
-            var user = await repository.FetchUserById(request.Id);
-            
+            var user = await repository.GetUserByIdAsync(request.Id, cancellationToken);
             if (user == null)
             {
                 return Result<UserDto>.NotFound("User not found");

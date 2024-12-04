@@ -18,4 +18,16 @@
       <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoint.Create.cs">
+        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoint.GetById.cs">
+        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoint.Update.cs">
+        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
