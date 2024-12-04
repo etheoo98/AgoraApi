@@ -28,6 +28,9 @@
       <Compile Update="Api\V1\Endpoints\UsersEndpoint.Update.cs">
         <DependentUpon>UsersEndpoint.cs</DependentUpon>
       </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoint.Delete.cs">
+        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

@@ -19,7 +19,6 @@ public partial class UsersEndpoint
         {
             var query = new GetUserByIdQuery(id);
             var validation = await validator.ValidateAsync(query);
-        
             if (!validation.IsValid)
             {
                 return Results.ValidationProblem(validation.ToDictionary());
