@@ -1,6 +1,7 @@
 ﻿using Application.Common.Models;
 using Ardalis.Result;
 using Domain.Interfaces.Repositories;
+using Mapster;
 using MediatR;
 
 namespace Application.Users.Queries.GetUserById;
@@ -18,8 +19,8 @@ public class GetUserByIdQueryHandler(IUserRepository repository)
                 return Result<UserDto>.NotFound("User not found");
             }
             
-            var userResponse = new UserDto(user.Id, user.Username);
-            return Result<UserDto>.Success(userResponse);
+            var response = user.Adapt<UserDto>();
+            return Result<UserDto>.Success(response);
         }
         catch (Exception ex)
         {
