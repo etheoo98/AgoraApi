@@ -1,6 +1,7 @@
-﻿using Application.Users.Commands.UpdateUser;
+﻿using Application.Auth.Commands.LoginUser;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -8,19 +9,17 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UsersEndpoint
+public partial class AuthEndpoints
 {
-    private void AddUpdateUserRoute(IEndpointRouteBuilder app)
+    public void AddLoginRoute(IEndpointRouteBuilder app)
     {
-        app.MapPatch("/{id:int}", async (
-            int id, 
-            UpdateUserDto request,
-            IValidator<UpdateUserCommand> validator, 
+        app.MapPost("/login", async (
+            LoginDto loginDto,
+            IValidator<LoginUserCommand> validator,
             ISender sender) =>
         {
-            var command = new UpdateUserCommand(id, request.Email, request.Username, request.Password);
+            var command = loginDto.Adapt<LoginUserCommand>();
             var validation = await validator.ValidateAsync(command);
-        
             if (!validation.IsValid)
             {
                 return Results.ValidationProblem(validation.ToDictionary());
@@ -28,6 +27,6 @@ public partial class UsersEndpoint
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        }).WithName("Update User");
+        });
     }
 }

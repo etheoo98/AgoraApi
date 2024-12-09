@@ -1,4 +1,5 @@
-﻿using Domain.Common;
+﻿using System.Security.Claims;
+using Domain.Common;
 
 namespace Domain.Entities;
 

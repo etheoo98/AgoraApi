@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using Application.Common.Interfaces;
+using Application.Common.Services;
+using FluentValidation;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +15,7 @@ public static class DependencyInjection
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
         services.AddMapster();
+        services.AddSingleton<ITokenGenerator, TokenGenerator>();
 
         return services;
     }

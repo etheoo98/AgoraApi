@@ -8,22 +8,22 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UsersEndpoint
+public partial class UserEndpoints
 {
     private void AddCreateUserRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/", async (
             CreateUserCommand request,
-            IValidator<CreateUserCommand> validator, 
+            IValidator<CreateUserCommand> validator,
             ISender sender) =>
         {
             var validation = await validator.ValidateAsync(request);
-        
+
             if (!validation.IsValid)
             {
                 return Results.ValidationProblem(validation.ToDictionary());
             }
-            
+
             var result = await sender.Send(request);
             return result.ToMinimalApiResult();
         }).WithName("Create User");

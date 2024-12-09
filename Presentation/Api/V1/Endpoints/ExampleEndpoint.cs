@@ -14,6 +14,6 @@ public partial class ExampleEndpoint : CarterModule
         {
             var result = Result<string>.Success("Hello World");
             return Task.FromResult(result);
-        });
+        }).RequireAuthorization();
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UsersEndpoint
+public partial class UserEndpoints
 {
     private void AddGetUserByIdRoute(IEndpointRouteBuilder app)
     {
