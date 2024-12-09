@@ -1,11 +1,10 @@
-﻿using Domain.Interfaces.Repositories;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Application.Users.Commands.UpdateUser;
 
-public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
+public class UpdateUserCommandValidator : AbstractValidator<UpdateUserCommand>
 {
-    public UpdateUserValidator()
+    public UpdateUserCommandValidator()
     {
         RuleFor(user => user.Id)
             .GreaterThan(0).WithMessage("Id must be greater than 0.");

@@ -1,14 +1,16 @@
-﻿using Application.Common.Interfaces;
-using Application.Common.Models;
+﻿using Application.Auth.Responses;
+using Application.Auth.Services;
 using Ardalis.Result;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.Auth.Commands.LoginWithRefreshToken;
 
-public class LoginWithRefreshTokenHandler (IAuthRepository authRepository, ITokenGenerator tokenGenerator) : IRequestHandler<LoginWithRefreshTokenCommand, Result<TokenDto>>
+public sealed record LoginWithRefreshToken(string RefreshToken) : IRequest<Result<TokenDto>>;
+
+public class LoginWithRefreshTokenHandler (IAuthRepository authRepository, ITokenGenerator tokenGenerator) : IRequestHandler<LoginWithRefreshToken, Result<TokenDto>>
 {
-    public async Task<Result<TokenDto>> Handle(LoginWithRefreshTokenCommand request, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> Handle(LoginWithRefreshToken request, CancellationToken cancellationToken)
     {
         try
         {

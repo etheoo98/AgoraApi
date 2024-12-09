@@ -17,10 +17,10 @@ public partial class AuthEndpoints
     {
         app.MapPost("/refresh", async (
             LoginWithRefreshTokenDto request,
-            IValidator<LoginWithRefreshTokenCommand> validator,
+            IValidator<LoginWithRefreshToken> validator,
             ISender sender) =>
         {
-            var command = request.Adapt<LoginWithRefreshTokenCommand>();
+            var command = request.Adapt<LoginWithRefreshToken>();
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
             {

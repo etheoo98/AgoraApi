@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Models;
+﻿namespace Application.Users.Responses;
 
 public sealed record UserDto(
     int Id,

@@ -20,10 +20,10 @@ public partial class AuthEndpoints
     {
         app.MapPost("/login", async (
             LoginDto request,
-            IValidator<LoginUserCommand> validator,
+            IValidator<LoginUser> validator,
             ISender sender) =>
         {
-            var command = request.Adapt<LoginUserCommand>();
+            var command = request.Adapt<LoginUser>();
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
             {

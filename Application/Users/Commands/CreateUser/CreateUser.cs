@@ -1,4 +1,4 @@
-﻿using Application.Common.Models;
+﻿using Application.Users.Responses;
 using Ardalis.Result;
 using BC = BCrypt.Net.BCrypt;
 using Domain.Interfaces.Factories;
@@ -8,6 +8,11 @@ using MediatR;
 
 namespace Application.Users.Commands.CreateUser;
 
+public sealed record CreateUserCommand(
+    string Email, 
+    string Username, 
+    string Password) : IRequest<Result<UserDto>>;
+    
 public class CreateUserCommandHandler(IUserFactory userFactory, IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<UserDto>>
 {
     public async Task<Result<UserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)

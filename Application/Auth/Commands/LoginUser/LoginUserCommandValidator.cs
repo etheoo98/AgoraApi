@@ -2,9 +2,9 @@
 
 namespace Application.Auth.Commands.LoginUser;
 
-public class LoginUserValidator : AbstractValidator<LoginUserCommand>
+public class LoginUserCommandValidator : AbstractValidator<LoginUser>
 {
-    public LoginUserValidator()
+    public LoginUserCommandValidator()
     {
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required.");

@@ -2,11 +2,16 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Common.Services;
+namespace Application.Auth.Services;
+
+public interface ITokenGenerator
+{
+    string GenerateToken(int userId, string username);
+    string GenerateRefreshToken();
+}
 
 public class TokenGenerator(IConfiguration configuration) : ITokenGenerator
 {

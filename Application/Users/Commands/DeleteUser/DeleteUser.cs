@@ -1,9 +1,12 @@
-﻿using Ardalis.Result;
+﻿using Application.Common.Interfaces;
+using Ardalis.Result;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.Users.Commands.DeleteUser;
+
+public sealed record DeleteUserCommand(int Id) : IRequest<Result>, IHasId;
 
 public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler<DeleteUserCommand, Result>
 {

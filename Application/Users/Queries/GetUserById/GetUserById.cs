@@ -1,10 +1,13 @@
-﻿using Application.Common.Models;
+﻿using Application.Common.Interfaces;
+using Application.Users.Responses;
 using Ardalis.Result;
 using Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 
 namespace Application.Users.Queries.GetUserById;
+
+public sealed record GetUserByIdQuery(int Id) : IRequest<Result<UserDto>>, IHasId;
 
 public class GetUserByIdQueryHandler(IUserRepository repository)
     : IRequestHandler<GetUserByIdQuery, Result<UserDto>>

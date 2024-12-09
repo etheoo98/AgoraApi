@@ -2,9 +2,9 @@
 
 namespace Application.Auth.Commands.LoginWithRefreshToken;
 
-public class LoginWithRefreshTokenValidator : AbstractValidator<LoginWithRefreshTokenCommand>
+public class LoginWithRefreshTokenCommandValidator : AbstractValidator<LoginWithRefreshToken>
 {
-    public LoginWithRefreshTokenValidator()
+    public LoginWithRefreshTokenCommandValidator()
     {
         RuleFor(x => x.RefreshToken)
             .NotEmpty()

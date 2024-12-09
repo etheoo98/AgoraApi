@@ -2,9 +2,9 @@
 
 namespace Application.Users.Commands.CreateUser;
 
-public class CreateUserValidator : AbstractValidator<CreateUserCommand>
+public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
-    public CreateUserValidator()
+    public CreateUserCommandValidator()
     {
         RuleFor(user => user.Email)
             .NotEmpty().WithMessage("Email is required.")

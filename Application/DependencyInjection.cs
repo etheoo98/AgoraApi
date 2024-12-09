@@ -1,5 +1,4 @@
-﻿using Application.Common.Interfaces;
-using Application.Common.Services;
+﻿using Application.Auth.Services;
 using FluentValidation;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;

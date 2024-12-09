@@ -1,4 +1,4 @@
-﻿using Application.Common.Models;
+﻿using Application.Users.Responses;
 using Ardalis.Result;
 using BC = BCrypt.Net.BCrypt;
 using Domain.Entities;
@@ -8,6 +8,12 @@ using MediatR;
 
 namespace Application.Users.Commands.UpdateUser;
 
+public sealed record UpdateUserCommand(
+    int Id,
+    string? Email, 
+    string? Username, 
+    string? Password) : IRequest<Result<UserDto>>;
+    
 public class UpdateUserHandler(IUserRepository repository) : IRequestHandler<UpdateUserCommand, Result<UserDto>>
 {
     public async Task<Result<UserDto>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)

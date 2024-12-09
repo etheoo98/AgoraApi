@@ -2,4 +2,4 @@
 
 namespace Application.Users.Commands.DeleteUser;
 
-public class DeleteUserValidator : IdValidator<DeleteUserCommand>;
+public class DeleteUserCommandValidator : IdValidator<DeleteUserCommand>;

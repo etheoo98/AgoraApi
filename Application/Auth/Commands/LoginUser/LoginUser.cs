@@ -1,5 +1,5 @@
-﻿using Application.Common.Interfaces;
-using Application.Common.Models;
+﻿using Application.Auth.Responses;
+using Application.Auth.Services;
 using Ardalis.Result;
 using BC = BCrypt.Net.BCrypt;
 using Domain.Entities;
@@ -8,9 +8,14 @@ using MediatR;
 
 namespace Application.Auth.Commands.LoginUser;
 
-public class LoginUserHandler(IAuthRepository authRepository, ITokenGenerator tokenGenerator) : IRequestHandler<LoginUserCommand, Result<TokenDto>>
+public sealed record LoginUser(
+    string? Email,
+    string? Username,
+    string Password) : IRequest<Result<TokenDto>>;
+
+public class LoginUserHandler(IAuthRepository authRepository, ITokenGenerator tokenGenerator) : IRequestHandler<LoginUser, Result<TokenDto>>
 {
-    public async Task<Result<TokenDto>> Handle(LoginUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<TokenDto>> Handle(LoginUser request, CancellationToken cancellationToken)
     {
         try
         {
