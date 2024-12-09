@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Application.Users.Commands.CreateUser;
+namespace Application.Auth.Commands.RegisterUser;
 
-public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
+public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
 {
-    public CreateUserCommandValidator()
+    public RegisterUserCommandValidator()
     {
         RuleFor(user => user.Email)
             .NotEmpty().WithMessage("Email is required.")

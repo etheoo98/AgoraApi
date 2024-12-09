@@ -7,6 +7,7 @@ public partial class AuthEndpoints() : CarterModule("/auth")
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
+        AddRegisterRoute(app);
         AddLoginRoute(app);
         AddRefreshRoute(app);
     }

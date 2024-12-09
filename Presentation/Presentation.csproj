@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Api\V1\Endpoints\UserEndpoints.Create.cs">
-        <DependentUpon>UserEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\AuthEndpoints.Register.cs">
+        <DependentUpon>AuthEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\UserEndpoints.GetById.cs">
         <DependentUpon>UserEndpoints.cs</DependentUpon>

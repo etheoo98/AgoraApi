@@ -1,5 +1,4 @@
 ﻿using Application.Common.Validators;
-using Application.Users.Commands.CreateUser;
 using Application.Users.Commands.DeleteUser;
 using Application.Users.Queries.GetUserById;
 using Ardalis.Result.AspNetCore;

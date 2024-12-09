@@ -1,21 +1,21 @@
 ﻿using Application.Users.Responses;
 using Ardalis.Result;
-using BC = BCrypt.Net.BCrypt;
 using Domain.Interfaces.Factories;
 using Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
+using BC = BCrypt.Net.BCrypt;
 
-namespace Application.Users.Commands.CreateUser;
+namespace Application.Auth.Commands.RegisterUser;
 
-public sealed record CreateUserCommand(
+public sealed record RegisterUserCommand(
     string Email, 
     string Username, 
     string Password) : IRequest<Result<UserDto>>;
     
-public class CreateUserCommandHandler(IUserFactory userFactory, IUserRepository userRepository) : IRequestHandler<CreateUserCommand, Result<UserDto>>
+public class RegisterUserHandler(IUserFactory userFactory, IUserRepository userRepository) : IRequestHandler<RegisterUserCommand, Result<UserDto>>
 {
-    public async Task<Result<UserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<Result<UserDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         try
         {

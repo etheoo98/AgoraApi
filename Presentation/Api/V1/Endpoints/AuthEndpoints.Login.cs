@@ -32,6 +32,6 @@ public partial class AuthEndpoints
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        });
+        }).WithName("Login");
     }
 }

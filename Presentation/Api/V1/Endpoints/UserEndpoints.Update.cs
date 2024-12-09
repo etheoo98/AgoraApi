@@ -25,7 +25,6 @@ public partial class UserEndpoints
         {
             var command = new UpdateUserCommand(id, request.Email, request.Username, request.Password);
             var validation = await validator.ValidateAsync(command);
-        
             if (!validation.IsValid)
             {
                 return Results.ValidationProblem(validation.ToDictionary());
