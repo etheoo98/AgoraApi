@@ -9,16 +9,21 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
+public sealed record LoginDto(
+    string? Email,
+    string? Username,
+    string Password);
+
 public partial class AuthEndpoints
 {
     public void AddLoginRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/login", async (
-            LoginDto loginDto,
+            LoginDto request,
             IValidator<LoginUserCommand> validator,
             ISender sender) =>
         {
-            var command = loginDto.Adapt<LoginUserCommand>();
+            var command = request.Adapt<LoginUserCommand>();
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
             {

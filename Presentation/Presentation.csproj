@@ -20,16 +20,16 @@
 
     <ItemGroup>
       <Compile Update="Api\V1\Endpoints\UserEndpoints.Create.cs">
-        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+        <DependentUpon>UserEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\UserEndpoints.GetById.cs">
-        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+        <DependentUpon>UserEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\UserEndpoints.Update.cs">
-        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+        <DependentUpon>UserEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\UserEndpoints.Delete.cs">
-        <DependentUpon>UsersEndpoint.cs</DependentUpon>
+        <DependentUpon>UserEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Login.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>

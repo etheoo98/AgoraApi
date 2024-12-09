@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
+public sealed record UpdateUserDto(
+    string? Email, 
+    string? Username, 
+    string? Password);
+
 public partial class UserEndpoints
 {
     private void AddUpdateUserRoute(IEndpointRouteBuilder app)

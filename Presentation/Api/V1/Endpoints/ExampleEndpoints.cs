@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class ExampleEndpoint : CarterModule
+public class ExampleEndpoints : CarterModule
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {

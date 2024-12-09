@@ -1,5 +1,4 @@
-﻿using Application.Auth.Commands.LoginUser;
-using Application.Auth.Commands.LoginWithRefreshToken;
+﻿using Application.Auth.Commands.LoginWithRefreshToken;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
@@ -10,12 +9,14 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
+public sealed record LoginWithRefreshTokenDto(string RefreshToken);
+
 public partial class AuthEndpoints
 {
     public void AddRefreshRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/refresh", async (
-            LoginWithRefreshToken request,
+            LoginWithRefreshTokenDto request,
             IValidator<LoginWithRefreshTokenCommand> validator,
             ISender sender) =>
         {
