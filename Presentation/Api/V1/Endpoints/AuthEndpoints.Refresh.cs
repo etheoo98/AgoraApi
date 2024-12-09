@@ -13,7 +13,7 @@ public sealed record LoginWithRefreshTokenDto(string RefreshToken);
 
 public partial class AuthEndpoints
 {
-    public void AddRefreshRoute(IEndpointRouteBuilder app)
+    private void AddRefreshRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/refresh", async (
             LoginWithRefreshTokenDto request,

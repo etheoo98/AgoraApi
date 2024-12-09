@@ -16,7 +16,7 @@ public sealed record LoginDto(
 
 public partial class AuthEndpoints
 {
-    public void AddLoginRoute(IEndpointRouteBuilder app)
+    private void AddLoginRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/login", async (
             LoginDto request,
