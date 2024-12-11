@@ -6,6 +6,8 @@ public class CreateThreadCommandValidator : AbstractValidator<CreateThreadComman
 {
     public CreateThreadCommandValidator()
     {
+        RuleFor(c => c.ForumId).NotNull().NotEmpty();
+        
         RuleFor(c => c.Title)
             .NotEmpty().WithMessage("Name is required")
             .MinimumLength(5).WithMessage("Name must have at least 5 characters.")

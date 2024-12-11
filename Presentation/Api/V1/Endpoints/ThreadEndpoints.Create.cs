@@ -17,13 +17,16 @@ public partial class ThreadsEndpoints
     private void AddCreateThreadRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/", async (
+            int forumId,
             CreateThreadDto request,
             HttpContext httpContext,
             IValidator<CreateThreadCommand> validator, 
             ISender sender) =>
         {
             var userId = httpContext.GetUserId();
-            var command = request.Adapt<CreateThreadCommand>() with { CreatorUserId = userId };;
+            var command = request.Adapt<CreateThreadCommand>() 
+                with { CreatorUserId = userId, ForumId = forumId };
+            
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
             {
