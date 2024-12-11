@@ -1,25 +1,28 @@
-﻿using Application.Common.Validators;
-using Application.Users.Commands.DeleteUser;
-using Application.Users.Queries.GetUserById;
+﻿using Application.Forums.Commands;
+using Application.Threads.Commands.CreateThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UsersEndpoints
+public sealed record CreateForumDto(string Name, string? Description);
+
+public partial class ForumsEndpoints
 {
-    private void AddDeleteUserRoute(IEndpointRouteBuilder app)
+    private void AddCreateForumRoute(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/{id:int}", async (
-            int id,
-            IValidator<DeleteUserCommand> validator, 
+        app.MapPost("/", async (
+            CreateForumDto request,
+            IValidator<CreateForumCommand> validator, 
             ISender sender) =>
         {
-            var command = new DeleteUserCommand(id);
+            var command = request.Adapt<CreateForumCommand>();
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
             {
@@ -28,6 +31,6 @@ public partial class UsersEndpoints
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        }).WithName("Delete User");
+        }).WithName("Create Forum").RequireAuthorization();
     }
 }

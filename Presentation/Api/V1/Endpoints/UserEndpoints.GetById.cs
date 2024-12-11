@@ -4,11 +4,12 @@ using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UserEndpoints
+public partial class UsersEndpoints
 {
     private void AddGetUserByIdRoute(IEndpointRouteBuilder app)
     {

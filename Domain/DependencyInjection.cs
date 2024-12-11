@@ -9,6 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
         services.AddScoped<IUserFactory, UserFactory>();
+        services.AddScoped<IForumFactory, ForumFactory>();
+        services.AddScoped<IThreadFactory, ThreadFactory>();
         
         return services;
     }

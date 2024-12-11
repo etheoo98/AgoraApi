@@ -37,6 +37,12 @@
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Refresh.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>
       </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadEndpoints.Create.cs">
+        <DependentUpon>ThreadEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ForumsEndpoints.Create.cs">
+        <DependentUpon>ForumsEndpoints.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

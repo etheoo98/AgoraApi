@@ -13,7 +13,7 @@ public sealed record UpdateUserDto(
     string? Username, 
     string? Password);
 
-public partial class UserEndpoints
+public partial class UsersEndpoints
 {
     private void AddUpdateUserRoute(IEndpointRouteBuilder app)
     {

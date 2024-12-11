@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class UsersEndpoints() : CarterModule("/users")
+public partial class ForumsEndpoints() : CarterModule("/forums")
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        AddGetUserByIdRoute(app);
-        AddUpdateUserRoute(app);
-        AddDeleteUserRoute(app);
+        AddCreateForumRoute(app);
     }
 }

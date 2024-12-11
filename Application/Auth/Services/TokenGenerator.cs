@@ -22,7 +22,7 @@ public class TokenGenerator(IConfiguration configuration) : ITokenGenerator
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Sub, username),
+            new(JwtRegisteredClaimNames.Sub, userId.ToString())
         };
         
         var tokenDescriptor = new SecurityTokenDescriptor
