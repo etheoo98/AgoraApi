@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.FunctionalTests", "Application.FunctionalTests\Application.FunctionalTests.csproj", "{8187D65F-D579-45E3-B21D-681ADD95E02C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{7802590C-141F-4F91-B2D9-5C0FD864444B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7802590C-141F-4F91-B2D9-5C0FD864444B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7802590C-141F-4F91-B2D9-5C0FD864444B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8187D65F-D579-45E3-B21D-681ADD95E02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8187D65F-D579-45E3-B21D-681ADD95E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8187D65F-D579-45E3-B21D-681ADD95E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8187D65F-D579-45E3-B21D-681ADD95E02C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{723AA5CA-8C96-4CBC-89FF-3E02424C6926} = {4B6BC7F5-D1D7-4ED6-9F54-05041184D9F2}
@@ -52,5 +58,6 @@ Global
 		{7802590C-141F-4F91-B2D9-5C0FD864444B} = {4B6BC7F5-D1D7-4ED6-9F54-05041184D9F2}
 		{AC5CCE30-A072-4872-8190-8BE1B97696BF} = {4B6BC7F5-D1D7-4ED6-9F54-05041184D9F2}
 		{09D3A082-7EDA-40F3-8D12-9097AE5A1884} = {4B6BC7F5-D1D7-4ED6-9F54-05041184D9F2}
+		{8187D65F-D579-45E3-B21D-681ADD95E02C} = {3D53FB82-1F73-4962-916A-01EA78DBBF11}
 	EndGlobalSection
 EndGlobal
