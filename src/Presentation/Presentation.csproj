@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Ardalis.Result" Version="10.1.0" />
+      <PackageReference Include="Ardalis.Result.AspNetCore" Version="10.1.0" />
+      <PackageReference Include="Carter" Version="9.0.0" />
+      <PackageReference Include="FluentValidation" Version="11.11.0" />
+      <PackageReference Include="MediatR" Version="12.4.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Api\V1\Endpoints\AuthEndpoints.Register.cs">
+        <DependentUpon>AuthEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.GetById.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.Update.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.Delete.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\AuthEndpoints.Login.cs">
+        <DependentUpon>AuthEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\AuthEndpoints.Refresh.cs">
+        <DependentUpon>AuthEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.create.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ForumsEndpoints.Create.cs">
+        <DependentUpon>ForumsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Create.cs">
+        <DependentUpon>CommentsEndpoints.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+</Project>
