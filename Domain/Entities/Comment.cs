@@ -3,14 +3,14 @@ using Domain.Common;
 
 namespace Domain.Entities;
 
-public class Thread : BaseAuditableEntity
+public class Comment : BaseAuditableEntity
 {
-    public string Title { get; set; }
     public string Content { get; set; }
-    public int ForumId { get; set; }
-    public Forum Forum { get; set; }
     
-    [ForeignKey("AuthorId")] 
+    public Thread Thread { get; set; }
+    public int ThreadId { get; set; }
+    
+    [ForeignKey("AuthorId")]
     public User Author { get; set; }
     public int AuthorId { get; set; }
 }

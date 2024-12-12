@@ -10,4 +10,5 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<RefreshToken> RefreshTokens { get; set; }
     public DbSet<Forum> Forums { get; set; }
     public DbSet<Thread> Threads { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 }

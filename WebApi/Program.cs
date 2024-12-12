@@ -46,5 +46,4 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapCarter();
-app.MapGet("/test", () => "Test endpoint working!");
 app.Run();

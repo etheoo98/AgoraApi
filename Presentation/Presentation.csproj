@@ -22,14 +22,14 @@
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Register.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\UserEndpoints.GetById.cs">
-        <DependentUpon>UserEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.GetById.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\UserEndpoints.Update.cs">
-        <DependentUpon>UserEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.Update.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\UserEndpoints.Delete.cs">
-        <DependentUpon>UserEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.Delete.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Login.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>
@@ -37,11 +37,14 @@
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Refresh.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\ThreadEndpoints.Create.cs">
-        <DependentUpon>ThreadEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.create.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\ForumsEndpoints.Create.cs">
         <DependentUpon>ForumsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Create.cs">
+        <DependentUpon>CommentsEndpoints.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

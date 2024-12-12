@@ -5,14 +5,14 @@ namespace Domain.Factories;
 
 public class ThreadFactory :IThreadFactory
 {
-    public Thread Create(string title, string content, int forumId, int creatorId)
+    public Thread Create(string title, string content, int forumId, int authorId)
     {
         return new Thread
         {
             Title = title,
             Content = content,
             ForumId = forumId,
-            CreatorId = creatorId,
+            AuthorId = authorId,
             Created = DateTimeOffset.Now,
             LastModified = DateTimeOffset.Now,
             IsDeleted = false,

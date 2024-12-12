@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.AddScoped<IAuthRepository, AuthRepository>();
         services.AddScoped<IForumRepository, ForumRepository>();
         services.AddScoped<IThreadRepository, ThreadRepository>();
+        services.AddScoped<ICommentRepository, CommentRepository>();
         
         return services;
     }
