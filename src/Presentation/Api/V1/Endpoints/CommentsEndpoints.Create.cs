@@ -12,7 +12,7 @@ namespace Presentation.Api.V1.Endpoints;
 
 public partial class CommentsEndpoints
 {
-    public void AddCreateCommentRoute(IEndpointRouteBuilder app)
+    private void AddCreateCommentRoute(IEndpointRouteBuilder app)
     {
         app.MapPost("/", async (
             int threadId,

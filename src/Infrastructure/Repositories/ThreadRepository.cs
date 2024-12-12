@@ -18,8 +18,19 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         return await context.Threads.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task UpdateThread(Thread thread, CancellationToken cancellationToken)
+    public async Task UpdateThread(Thread thread, string? title, string? content, CancellationToken cancellationToken)
     {
+        if (!string.IsNullOrEmpty(title))
+        {
+            thread.Title = title;
+        }
+
+        if (!string.IsNullOrEmpty(content))
+        {
+            thread.Content = content;
+        }
+        
+        thread.LastModified = DateTimeOffset.Now;
         context.Threads.Update(thread);
         await context.SaveChangesAsync(cancellationToken);
     }
@@ -27,5 +38,15 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
     public async Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken)
     {
         return await context.Threads.AnyAsync(c => c.Id == threadId, cancellationToken);
+    }
+
+    public async Task DeleteThread(Thread thread, CancellationToken cancellationToken)
+    {
+        thread.IsDeleted = true;
+        thread.Deleted = DateTimeOffset.Now;
+        thread.LastModified = DateTimeOffset.Now;
+        
+        context.Threads.Update(thread);
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

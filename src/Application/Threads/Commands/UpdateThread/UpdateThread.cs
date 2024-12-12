@@ -30,9 +30,7 @@ public class UpdateThreadHandler(IThreadRepository threadRepository) : IRequestH
                 return Result<ThreadDto>.Forbidden("Cannot update thread created by another user");
             }
             
-            UpdateThreadProperties(thread, request);
-            
-            await threadRepository.UpdateThread(thread, cancellationToken);
+            await threadRepository.UpdateThread(thread, request.Title, request.Content, cancellationToken);
 
             return MapToResponse(thread);
         }
@@ -46,19 +44,6 @@ public class UpdateThreadHandler(IThreadRepository threadRepository) : IRequestH
     private static bool IsUserAuthorized(int authorId, int userId)
     {
         return authorId == userId;
-    }
-
-    private static void UpdateThreadProperties(Thread thread, UpdateThreadCommand request)
-    {
-        if (!string.IsNullOrEmpty(request.Title))
-        {
-            thread.Title = request.Title;
-        }
-
-        if (!string.IsNullOrEmpty(request.Content))
-        {
-            thread.Content = request.Content;
-        }
     }
 
     private static Result<ThreadDto> MapToResponse(Thread thread)

@@ -9,5 +9,6 @@ public partial class ThreadsEndpoints() : CarterModule("/")
     {
         AddCreateThreadRoute(app);
         AddUpdateThreadRoute(app);
+        AddDeleteThreadRoute(app);
     }
 }

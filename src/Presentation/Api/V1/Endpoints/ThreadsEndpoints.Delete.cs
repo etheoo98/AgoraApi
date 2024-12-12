@@ -1,7 +1,6 @@
-﻿using Application.Threads.Commands.UpdateThread;
+﻿using Application.Threads.Commands.DeleteThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
-using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -10,21 +9,18 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public sealed record UpdateThreadDto(string Title, string Content);
-
 public partial class ThreadsEndpoints
 {
-    private void AddUpdateThreadRoute(IEndpointRouteBuilder app)
+    private void AddDeleteThreadRoute(IEndpointRouteBuilder app)
     {
-        app.MapPatch("/threads/{threadId:int}", async (
-            int threadId, 
-            UpdateThreadDto request,
+        app.MapDelete("/threads/{id:int}", async (
+            int id,
             HttpContext context,
-            IValidator<UpdateThreadCommand> validator, 
+            IValidator<DeleteThreadCommand> validator, 
             ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = request.Adapt<UpdateThreadCommand>() with { ThreadId = threadId, UserId = userId };
+            var command = new DeleteThreadCommand(id, userId);
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -34,6 +30,6 @@ public partial class ThreadsEndpoints
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        }).WithName("Update Thread").RequireAuthorization();
+        }).WithName("Delete Thread");
     }
 }

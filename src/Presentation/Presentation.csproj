@@ -49,6 +49,9 @@
       <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Create.cs">
         <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
       </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Delete.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>
