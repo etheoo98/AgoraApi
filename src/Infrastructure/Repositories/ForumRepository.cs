@@ -13,6 +13,11 @@ public class ForumRepository(ApplicationDbContext context) : IForumRepository
         await context.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<Forum?> GetForumByIdAsync(int forumId, CancellationToken cancellationToken)
+    {
+        return await context.Forums.FirstOrDefaultAsync(x => x.Id == forumId, cancellationToken);
+    }
+
     public async Task<bool> ForumExistsAsync(int forumId, CancellationToken cancellationToken)
     {
         return await context.Forums.AnyAsync(forum => forum.Id == forumId, cancellationToken);

@@ -19,10 +19,10 @@ public class CreateThreadHandler(IForumRepository forumRepository, IThreadFactor
     {
         try
         {
-            var forumExists = await forumRepository.ForumExistsAsync(request.ForumId, cancellationToken);
-            if (!forumExists)
+            var forum = await forumRepository.GetForumByIdAsync(request.ForumId, cancellationToken);
+            if (forum is null || forum.Deleted is not null)
             {
-                return Result<ThreadDto>.NotFound("Forum not found");
+                return Result<ThreadDto>.NotFound("Forum does not exist");
             }
             
             var thread = threadFactory.Create(request.Title, request.Content, request.ForumId, request.CreatorUserId);
