@@ -8,5 +8,5 @@ public interface IThreadRepository
     Task<Thread?> GetThreadByIdAsync(int id, CancellationToken cancellationToken);
     Task UpdateThread(Thread thread, string title, string content, CancellationToken cancellationToken);
     Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken);
-    Task DeleteThread(Thread thread, CancellationToken cancellationToken);
+    Task DeleteThreadAndComments(Thread thread, CancellationToken cancellationToken);
 }

@@ -31,7 +31,6 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         }
         
         thread.LastModified = DateTimeOffset.Now;
-        context.Threads.Update(thread);
         await context.SaveChangesAsync(cancellationToken);
     }
 
@@ -40,13 +39,21 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         return await context.Threads.AnyAsync(c => c.Id == threadId, cancellationToken);
     }
 
-    public async Task DeleteThread(Thread thread, CancellationToken cancellationToken)
+    public async Task DeleteThreadAndComments(Thread thread, CancellationToken cancellationToken)
     {
         thread.IsDeleted = true;
         thread.Deleted = DateTimeOffset.Now;
         thread.LastModified = DateTimeOffset.Now;
         
-        context.Threads.Update(thread);
+        var now = DateTimeOffset.Now;
+        
+        await context.Comments
+            .Where(c => c.ThreadId == thread.Id)
+            .ExecuteUpdateAsync(c => c
+                    .SetProperty(comment => comment.IsDeleted, true)
+                    .SetProperty(comment => comment.Deleted, now),
+                cancellationToken);
+        
         await context.SaveChangesAsync(cancellationToken);
     }
 }

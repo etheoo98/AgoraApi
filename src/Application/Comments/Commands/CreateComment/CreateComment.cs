@@ -5,7 +5,7 @@ using Domain.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 
-namespace Application.Comments.Commands;
+namespace Application.Comments.Commands.CreateComment;
 
 public sealed record CreateCommentCommand(
     string Content, 

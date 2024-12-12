@@ -1,4 +1,4 @@
-﻿using Application.Comments.Commands.CreateComment;
+﻿using Application.Comments.Commands.UpdateComment;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
@@ -10,21 +10,21 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
+public sealed record UpdateCommentDto(string Content);
+
 public partial class CommentsEndpoints
 {
-    private void AddCreateCommentRoute(IEndpointRouteBuilder app)
+    private static void AddUpdateCommentRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/threads/{threadId}/comments", async (
-            int threadId,
-            CreateCommentDto request,
+        app.MapPatch("/comments/{commentId:int}", async (
+            int commentId, 
+            UpdateCommentDto request,
             HttpContext context,
-            IValidator<CreateCommentCommand> validator,
-            ISender sender
-        ) =>
+            IValidator<UpdateCommentCommand> validator, 
+            ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = request.Adapt<CreateCommentCommand>()
-                with { ThreadId = threadId, AuthorId = userId };
+            var command = request.Adapt<UpdateCommentCommand>() with { CommentId = commentId, UserId = userId };
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -34,6 +34,6 @@ public partial class CommentsEndpoints
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        }).RequireAuthorization();
+        }).WithName("Update Comment").RequireAuthorization();
     }
 }

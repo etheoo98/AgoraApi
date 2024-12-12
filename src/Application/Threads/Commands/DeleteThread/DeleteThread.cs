@@ -26,7 +26,7 @@ public class DeleteThreadHandler(IThreadRepository threadRepository) : IRequestH
                 return Result.Forbidden("Cannot delete thread created by another user");
             }
         
-            await threadRepository.DeleteThread(thread, cancellationToken);
+            await threadRepository.DeleteThreadAndComments(thread, cancellationToken);
             
             return Result.SuccessWithMessage("Thread deleted");
         }
