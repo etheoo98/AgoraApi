@@ -6,5 +6,6 @@ public interface IThreadRepository
 {
     Task AddThread(Thread thread);
     Task<Thread?> GetThreadByIdAsync(int id, CancellationToken cancellationToken);
+    Task UpdateThread(Thread thread, CancellationToken cancellationToken);
     Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken);
 }

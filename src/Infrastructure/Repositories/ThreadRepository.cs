@@ -18,6 +18,12 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         return await context.Threads.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
+    public async Task UpdateThread(Thread thread, CancellationToken cancellationToken)
+    {
+        context.Threads.Update(thread);
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken)
     {
         return await context.Threads.AnyAsync(c => c.Id == threadId, cancellationToken);
