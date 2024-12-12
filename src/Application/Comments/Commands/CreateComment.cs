@@ -18,10 +18,10 @@ public class CreateComment(IThreadRepository threadRepository, ICommentFactory c
     {
         try
         {
-            var threadExists = await threadRepository.ThreadExists(request.ThreadId, cancellationToken);
-            if (!threadExists) // TODO: Verify that the thread isn't soft deleted before adding comment.
+            var thread = await threadRepository.GetThreadByIdAsync(request.ThreadId, cancellationToken);
+            if (thread is null || thread.Deleted is not null)
             {
-                return Result<CommentDto>.NotFound("Thread does not exist");
+                return Result<CommentDto>.NotFound("Thread does not exist or has bene deleted.");
             }
             
             var comment = commentFactory.Create(request.Content, request.ThreadId, request.AuthorId);
