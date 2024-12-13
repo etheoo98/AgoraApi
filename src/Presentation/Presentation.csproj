@@ -58,6 +58,9 @@
       <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Delete.cs">
         <DependentUpon>CommentsEndpoints.cs</DependentUpon>
       </Compile>
+      <Compile Update="Api\V1\Endpoints\UsersEndpoints.Search.cs">
+        <DependentUpon>UsersEndpoints.cs</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 </Project>

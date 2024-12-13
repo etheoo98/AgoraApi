@@ -10,5 +10,6 @@ public partial class UsersEndpoints() : CarterModule("/users")
         AddGetUserByIdRoute(app);
         AddUpdateUserRoute(app);
         AddDeleteUserRoute(app);
+        AddSearchUsersRoutes(app);
     }
 }

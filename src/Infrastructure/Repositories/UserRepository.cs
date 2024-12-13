@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
@@ -33,5 +34,31 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         
         context.Users.Update(user);
         await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<List<User>> SearchUsersAsync(string? searchTerm, int page, int pageSize, CancellationToken cancellationToken)
+    {
+        var query = context.Users.AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            query = query.Where(u => u.Username.Contains(searchTerm));
+        }
+        
+        return await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<int> CountUsersAsync(string? searchTerm, CancellationToken cancellationToken)
+    {
+        var query = context.Users.AsQueryable();
+        if (!string.IsNullOrEmpty(searchTerm))
+        {
+            query = query.Where(u => u.Username.Contains(searchTerm));
+        }
+        
+        return await query.CountAsync(cancellationToken);
     }
 }
