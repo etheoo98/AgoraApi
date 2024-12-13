@@ -18,8 +18,42 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         return await context.Threads.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
+    public async Task UpdateThread(Thread thread, string? title, string? content, CancellationToken cancellationToken)
+    {
+        if (!string.IsNullOrEmpty(title))
+        {
+            thread.Title = title;
+        }
+
+        if (!string.IsNullOrEmpty(content))
+        {
+            thread.Content = content;
+        }
+        
+        thread.LastModified = DateTimeOffset.Now;
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
     public async Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken)
     {
         return await context.Threads.AnyAsync(c => c.Id == threadId, cancellationToken);
+    }
+
+    public async Task DeleteThreadAndComments(Thread thread, CancellationToken cancellationToken)
+    {
+        thread.IsDeleted = true;
+        thread.Deleted = DateTimeOffset.Now;
+        thread.LastModified = DateTimeOffset.Now;
+        
+        var now = DateTimeOffset.Now;
+        
+        await context.Comments
+            .Where(c => c.ThreadId == thread.Id)
+            .ExecuteUpdateAsync(c => c
+                    .SetProperty(comment => comment.IsDeleted, true)
+                    .SetProperty(comment => comment.Deleted, now),
+                cancellationToken);
+        
+        await context.SaveChangesAsync(cancellationToken);
     }
 }

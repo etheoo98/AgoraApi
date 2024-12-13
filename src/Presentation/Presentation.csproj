@@ -37,13 +37,25 @@
       <Compile Update="Api\V1\Endpoints\AuthEndpoints.Refresh.cs">
         <DependentUpon>AuthEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.create.cs">
-        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
-      </Compile>
       <Compile Update="Api\V1\Endpoints\ForumsEndpoints.Create.cs">
         <DependentUpon>ForumsEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Create.cs">
+        <DependentUpon>CommentsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Update.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Create.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Delete.cs">
+        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Update.cs">
+        <DependentUpon>CommentsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Delete.cs">
         <DependentUpon>CommentsEndpoints.cs</DependentUpon>
       </Compile>
     </ItemGroup>

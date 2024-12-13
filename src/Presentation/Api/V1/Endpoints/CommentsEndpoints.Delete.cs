@@ -1,4 +1,4 @@
-﻿using Application.Comments.Commands.CreateComment;
+﻿using Application.Comments.Commands.DeleteComment;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
@@ -10,23 +10,18 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public sealed record CreateCommentDto(string Content);
-
 public partial class CommentsEndpoints
 {
-    private void AddCreateCommentRoute(IEndpointRouteBuilder app)
+    private static void AddDeleteCommentRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/threads/{threadId}/comments", async (
-            int threadId,
-            CreateCommentDto request,
+        app.MapDelete("/comment/{commentId:int}", async (
+            int commentId,
             HttpContext context,
-            IValidator<CreateCommentCommand> validator,
-            ISender sender
-        ) =>
+            IValidator<DeleteCommentCommand> validator,
+            ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = request.Adapt<CreateCommentCommand>()
-                with { ThreadId = threadId, AuthorId = userId };
+            var command = new DeleteCommentCommand(userId, commentId);
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -35,7 +30,8 @@ public partial class CommentsEndpoints
             }
             
             var result = await sender.Send(command);
+            
             return result.ToMinimalApiResult();
         }).RequireAuthorization();
-    }
+    } 
 }

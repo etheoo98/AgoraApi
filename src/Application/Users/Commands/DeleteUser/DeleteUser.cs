@@ -20,7 +20,6 @@ public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler
                 return Result.NotFound("User not found");
             }
             
-            SoftDeleteUser(user);
             await userRepository.UpdateUserAsync(user, cancellationToken);
             
             return Result.Success();
@@ -30,12 +29,5 @@ public class DeleteUserHandler(IUserRepository userRepository) : IRequestHandler
             const string? message = "An error occurred while deleting user";
             return Result.CriticalError(message);
         }
-    }
-
-    private void SoftDeleteUser(User user)
-    {
-        user.IsDeleted = true;
-        user.Deleted = DateTimeOffset.Now;
-        user.LastModified = DateTimeOffset.Now;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.Comments.Commands.CreateComment;
+﻿using Application.Threads.Commands.UpdateThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
@@ -10,23 +10,21 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public sealed record CreateCommentDto(string Content);
+public sealed record UpdateThreadDto(string Title, string Content);
 
-public partial class CommentsEndpoints
+public partial class ThreadsEndpoints
 {
-    private void AddCreateCommentRoute(IEndpointRouteBuilder app)
+    private void AddUpdateThreadRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/threads/{threadId}/comments", async (
-            int threadId,
-            CreateCommentDto request,
+        app.MapPatch("/threads/{threadId:int}", async (
+            int threadId, 
+            UpdateThreadDto request,
             HttpContext context,
-            IValidator<CreateCommentCommand> validator,
-            ISender sender
-        ) =>
+            IValidator<UpdateThreadCommand> validator, 
+            ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = request.Adapt<CreateCommentCommand>()
-                with { ThreadId = threadId, AuthorId = userId };
+            var command = request.Adapt<UpdateThreadCommand>() with { ThreadId = threadId, UserId = userId };
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)
@@ -36,6 +34,6 @@ public partial class CommentsEndpoints
             
             var result = await sender.Send(command);
             return result.ToMinimalApiResult();
-        }).RequireAuthorization();
+        }).WithName("Update Thread").RequireAuthorization();
     }
 }

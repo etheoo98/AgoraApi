@@ -24,4 +24,14 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
     {
         return await context.Users.FindAsync([id], cancellationToken);
     }
+
+    public async Task DeleteUser(User user, CancellationToken cancellationToken)
+    {
+        user.IsDeleted = true;
+        user.Deleted = DateTimeOffset.Now;
+        user.LastModified = DateTimeOffset.Now;
+        
+        context.Users.Update(user);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }

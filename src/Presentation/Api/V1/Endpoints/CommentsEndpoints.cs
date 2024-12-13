@@ -6,12 +6,12 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public sealed record CreateCommentDto(string Content);
-
-public partial class CommentsEndpoints() : CarterModule("/threads/{threadId}/comments")
+public partial class CommentsEndpoints() : CarterModule("/")
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
         AddCreateCommentRoute(app);
+        AddUpdateCommentRoute(app);
+        AddDeleteCommentRoute(app);
     }
 }
