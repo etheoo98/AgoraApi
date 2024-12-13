@@ -23,4 +23,11 @@ public class CommentRepository(ApplicationDbContext context) : ICommentRepositor
         context.Comments.Update(comment);
         return context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task DeleteCommentAsync(Comment comment, CancellationToken cancellationToken)
+    {
+        comment.IsDeleted = true;
+        comment.Deleted = DateTimeOffset.Now;
+        await context.SaveChangesAsync(cancellationToken);
+    }
 }
