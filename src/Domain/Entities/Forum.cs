@@ -9,5 +9,5 @@ public class Forum : BaseAuditableEntity
     
     public Forum? ParentForum { get; set; }
     public List<Forum> SubForums { get; set; } = [];
-    public List<Thread> Threads { get; set; } = [];
+    public List<Topic> Topics { get; set; } = [];
 }

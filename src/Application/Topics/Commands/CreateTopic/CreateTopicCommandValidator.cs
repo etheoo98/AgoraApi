@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Application.Threads.Commands.CreateThread;
+namespace Application.Topics.Commands.CreateTopic;
 
-public class CreateThreadCommandValidator : AbstractValidator<CreateThreadCommand>
+public class CreateTopicCommandValidator : AbstractValidator<CreateTopicCommand>
 {
-    public CreateThreadCommandValidator()
+    public CreateTopicCommandValidator()
     {
         RuleFor(c => c.ForumId).NotNull().NotEmpty();
         

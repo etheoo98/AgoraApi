@@ -5,12 +5,12 @@ namespace Domain.Factories;
 
 public class CommentFactory : ICommentFactory
 {
-    public Comment Create(string content, int threadId, int authorId)
+    public Comment Create(string content, int topicId, int authorId)
     {
         return new Comment
         {
             Content = content,
-            ThreadId = threadId,
+            TopicId = topicId,
             AuthorId = authorId,
             Created = DateTimeOffset.Now,
             LastModified = DateTimeOffset.Now,

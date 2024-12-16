@@ -3,30 +3,30 @@ using Ardalis.Result;
 using Domain.Interfaces.Repositories;
 using MediatR;
 
-namespace Application.Threads.Commands.DeleteThread;
+namespace Application.Topics.Commands.DeleteThread;
 
-public sealed record DeleteThreadCommand(
+public sealed record DeleteTopicCommand(
     int Id,
     int UserId) : IRequest<Result>, IHasId;
 
-public class DeleteThreadHandler(IThreadRepository threadRepository) : IRequestHandler<DeleteThreadCommand, Result>
+public class DeleteTopicHandler(ITopicRepository topicRepository) : IRequestHandler<DeleteTopicCommand, Result>
 {
-    public async Task<Result> Handle(DeleteThreadCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(DeleteTopicCommand request, CancellationToken cancellationToken)
     {
         try
         {
-            var thread = await threadRepository.GetThreadByIdAsync(request.Id, cancellationToken);
+            var thread = await topicRepository.GetTopicByIdAsync(request.Id, cancellationToken);
             if (thread is null)
             {
                 return Result.NotFound("Thread could not be found");
             }
 
-            if (!UserIsThreadAuthor(thread.AuthorId, request.UserId))
+            if (!UserIsTopicAuthor(thread.AuthorId, request.UserId))
             {
                 return Result.Forbidden("Cannot delete thread created by another user");
             }
         
-            await threadRepository.DeleteThreadAndComments(thread, cancellationToken);
+            await topicRepository.DeleteTopicAndComments(thread, cancellationToken);
             
             return Result.SuccessWithMessage("Thread deleted");
         }
@@ -37,7 +37,7 @@ public class DeleteThreadHandler(IThreadRepository threadRepository) : IRequestH
         }
     }
 
-    private static bool UserIsThreadAuthor(int authorId, int userId)
+    private static bool UserIsTopicAuthor(int authorId, int userId)
     {
         return authorId == userId;
     }

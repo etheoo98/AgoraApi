@@ -16,8 +16,8 @@ public partial class CommentsEndpoints
 {
     private void AddCreateCommentRoute(IEndpointRouteBuilder app)
     {
-        app.MapPost("/threads/{threadId}/comments", async (
-            int threadId,
+        app.MapPost("/topics/{topicId}/comments", async (
+            int topicId,
             CreateCommentDto request,
             HttpContext context,
             IValidator<CreateCommentCommand> validator,
@@ -26,7 +26,7 @@ public partial class CommentsEndpoints
         {
             var userId = context.GetUserId();
             var command = request.Adapt<CreateCommentCommand>()
-                with { ThreadId = threadId, AuthorId = userId };
+                with { TopicId = topicId, AuthorId = userId };
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)

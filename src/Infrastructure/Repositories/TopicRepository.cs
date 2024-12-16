@@ -1,54 +1,54 @@
 ﻿using Domain.Common;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using Thread = Domain.Entities.Thread;
 
 namespace Infrastructure.Repositories;
 
-public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
+public class TopicRepository(ApplicationDbContext context) : ITopicRepository
 {
-    public async Task AddThread(Thread thread)
+    public async Task AddTopic(Topic topic)
     {
-        await context.Threads.AddAsync(thread);
+        await context.Topics.AddAsync(topic);
         await context.SaveChangesAsync();
     }
 
-    public async Task<Thread?> GetThreadByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<Topic?> GetTopicByIdAsync(int id, CancellationToken cancellationToken)
     {
-        return await context.Threads.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        return await context.Topics.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task UpdateThread(Thread thread, string? title, string? content, CancellationToken cancellationToken)
+    public async Task UpdateTopic(Topic topic, string? title, string? content, CancellationToken cancellationToken)
     {
         if (!string.IsNullOrEmpty(title))
         {
-            thread.Title = title;
+            topic.Title = title;
         }
 
         if (!string.IsNullOrEmpty(content))
         {
-            thread.Content = content;
+            topic.Content = content;
         }
         
-        thread.LastModified = DateTimeOffset.Now;
+        topic.LastModified = DateTimeOffset.Now;
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<bool> ThreadExists(int threadId, CancellationToken cancellationToken)
+    public async Task<bool> TopicExists(int threadId, CancellationToken cancellationToken)
     {
-        return await context.Threads.AnyAsync(c => c.Id == threadId, cancellationToken);
+        return await context.Topics.AnyAsync(c => c.Id == threadId, cancellationToken);
     }
 
-    public async Task DeleteThreadAndComments(Thread thread, CancellationToken cancellationToken)
+    public async Task DeleteTopicAndComments(Topic topic, CancellationToken cancellationToken)
     {
-        thread.Deleted = DateTimeOffset.Now;
-        thread.LastModified = DateTimeOffset.Now;
+        topic.Deleted = DateTimeOffset.Now;
+        topic.LastModified = DateTimeOffset.Now;
         
         var now = DateTimeOffset.Now;
         
         await context.Comments
-            .Where(c => c.ThreadId == thread.Id)
+            .Where(c => c.TopicId == topic.Id)
             .ExecuteUpdateAsync(c => c
                     .SetProperty(comment => comment.Deleted, now),
                 cancellationToken);
@@ -68,7 +68,7 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         CancellationToken cancellationToken
     )
     {
-        var result = context.Threads.AsQueryable();
+        var result = context.Topics.AsQueryable();
 
         if (!string.IsNullOrEmpty(query) && !string.IsNullOrEmpty(searchAndOr))
         {
@@ -122,7 +122,7 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
 
     public async Task<int> CountAsync(string? query, CancellationToken cancellationToken)
     {
-        var result = context.Threads.AsQueryable();
+        var result = context.Topics.AsQueryable();
         
         if (!string.IsNullOrEmpty(query))
         {

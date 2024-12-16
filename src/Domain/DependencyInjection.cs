@@ -10,7 +10,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IUserFactory, UserFactory>();
         services.AddScoped<IForumFactory, ForumFactory>();
-        services.AddScoped<IThreadFactory, ThreadFactory>();
+        services.AddScoped<ITopicFactory, TopicFactory>();
         services.AddScoped<ICommentFactory, CommentFactory>();
         
         return services;

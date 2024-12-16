@@ -1,13 +1,13 @@
-﻿using Domain.Interfaces.Factories;
-using Thread = Domain.Entities.Thread;
+﻿using Domain.Entities;
+using Domain.Interfaces.Factories;
 
 namespace Domain.Factories;
 
-public class ThreadFactory :IThreadFactory
+public class TopicFactory :ITopicFactory
 {
-    public Thread Create(string title, string content, int forumId, int authorId)
+    public Topic Create(string title, string content, int forumId, int authorId)
     {
-        return new Thread
+        return new Topic
         {
             Title = title,
             Content = content,

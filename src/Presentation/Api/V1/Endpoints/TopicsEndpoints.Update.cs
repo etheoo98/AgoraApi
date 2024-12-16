@@ -1,4 +1,4 @@
-﻿using Application.Threads.Commands.UpdateThread;
+﻿using Application.Topics.Commands.UpdateThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
@@ -10,21 +10,21 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public sealed record UpdateThreadDto(string Title, string Content);
+public sealed record UpdateTopicDto(string Title, string Content);
 
-public partial class ThreadsEndpoints
+public partial class TopicsEndpoints
 {
-    private void AddUpdateThreadRoute(IEndpointRouteBuilder app)
+    private void AddUpdateTopicRoute(IEndpointRouteBuilder app)
     {
-        app.MapPatch("/threads/{threadId:int}", async (
-            int threadId, 
-            UpdateThreadDto request,
+        app.MapPatch("/topics/{topicId:int}", async (
+            int topicId, 
+            UpdateTopicDto request,
             HttpContext context,
-            IValidator<UpdateThreadCommand> validator, 
+            IValidator<UpdateTopicCommand> validator, 
             ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = request.Adapt<UpdateThreadCommand>() with { ThreadId = threadId, UserId = userId };
+            var command = request.Adapt<UpdateTopicCommand>() with { TopicId = topicId, UserId = userId };
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)

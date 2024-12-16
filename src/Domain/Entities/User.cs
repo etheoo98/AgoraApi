@@ -8,5 +8,5 @@ public class User : BaseAuditableEntity
     public string Username { get; set; }
     public string Password { get; set; }
     public DateTimeOffset? LastLogin { get; set; }
-    public List<Thread> Threads { get; set; } = [];
+    public List<Topic> Topics { get; set; } = [];
 }

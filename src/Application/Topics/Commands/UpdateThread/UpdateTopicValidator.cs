@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 
-namespace Application.Threads.Commands.UpdateThread;
+namespace Application.Topics.Commands.UpdateThread;
 
-public class UpdateThreadValidator : AbstractValidator<UpdateThreadCommand>
+public class UpdateTopicValidator : AbstractValidator<UpdateTopicCommand>
 {
-    public UpdateThreadValidator()
+    public UpdateTopicValidator()
     {
-        RuleFor(x => x.ThreadId)
+        RuleFor(x => x.TopicId)
             .GreaterThan(0).WithMessage("Thread Id must be greater than 0.");
         
         RuleFor(x => new { x.Title, x.Content})

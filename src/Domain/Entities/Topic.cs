@@ -3,7 +3,7 @@ using Domain.Common;
 
 namespace Domain.Entities;
 
-public class Thread : BaseAuditableEntity
+public class Topic : BaseAuditableEntity
 {
     public string Title { get; set; }
     public string Content { get; set; }

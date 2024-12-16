@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Routing;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class ThreadsEndpoints() : CarterModule("/")
+public partial class TopicsEndpoints() : CarterModule("/")
 {
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        AddCreateThreadRoute(app);
-        AddUpdateThreadRoute(app);
-        AddDeleteThreadRoute(app);
+        AddCreateTopicRoute(app);
+        AddUpdateTopicRoute(app);
+        AddDeleteTopicRoute(app);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Application.Threads.Commands.DeleteThread;
+﻿using Application.Topics.Commands.DeleteThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using MediatR;
@@ -9,18 +9,18 @@ using Presentation.Api.V1.Extensions;
 
 namespace Presentation.Api.V1.Endpoints;
 
-public partial class ThreadsEndpoints
+public partial class TopicsEndpoints
 {
-    private void AddDeleteThreadRoute(IEndpointRouteBuilder app)
+    private void AddDeleteTopicRoute(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/threads/{id:int}", async (
+        app.MapDelete("/topics/{id:int}", async (
             int id,
             HttpContext context,
-            IValidator<DeleteThreadCommand> validator, 
+            IValidator<DeleteTopicCommand> validator, 
             ISender sender) =>
         {
             var userId = context.GetUserId();
-            var command = new DeleteThreadCommand(id, userId);
+            var command = new DeleteTopicCommand(id, userId);
             
             var validation = await validator.ValidateAsync(command);
             if (!validation.IsValid)

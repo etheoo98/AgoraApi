@@ -43,20 +43,20 @@
       <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Create.cs">
         <DependentUpon>CommentsEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Update.cs">
-        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\TopicsEndpoints.Update.cs">
+        <DependentUpon>TopicsEndpoints.cs</DependentUpon>
       </Compile>
-      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Create.cs">
-        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
-      </Compile>
-      <Compile Update="Api\V1\Endpoints\ThreadsEndpoints.Delete.cs">
-        <DependentUpon>ThreadsEndpoints.cs</DependentUpon>
+      <Compile Update="Api\V1\Endpoints\TopicsEndpoints.Delete.cs">
+        <DependentUpon>TopicsEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Update.cs">
         <DependentUpon>CommentsEndpoints.cs</DependentUpon>
       </Compile>
       <Compile Update="Api\V1\Endpoints\CommentsEndpoints.Delete.cs">
         <DependentUpon>CommentsEndpoints.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Api\V1\Endpoints\TopicsEndpoints.Create.cs">
+        <DependentUpon>TopicsEndpoints.cs</DependentUpon>
       </Compile>
     </ItemGroup>
 

@@ -1,6 +1,6 @@
-﻿namespace Application.Threads.Responses;
+﻿namespace Application.Topics.Responses;
 
-public sealed record ThreadDto(
+public sealed record TopicDto(
     int Id, 
     string Title, 
     string Content, 

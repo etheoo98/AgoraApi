@@ -23,7 +23,7 @@ public sealed record GetSearchResultQuery(
 public class GetSearchResultHandler(
     IUserRepository userRepository,
     IForumRepository forumRepository,
-    IThreadRepository threadRepository,
+    ITopicRepository topicRepository,
     ICommentRepository commentRepository
     ) : IRequestHandler<GetSearchResultQuery, Result<SearchResponseDto>>
 {
@@ -32,7 +32,7 @@ public class GetSearchResultHandler(
         return request.Type?.ToLower() switch
         {
             "users" => await HandleMemberSearch(request, cancellationToken),
-            "threads" or "comments" or "forums" => await HandleContentSearch(request, cancellationToken),
+            "topics" or "comments" or "forums" => await HandleContentSearch(request, cancellationToken),
             _ => throw new ArgumentException($"Invalid search type: {request.Type}")
         };
     }
@@ -41,7 +41,7 @@ public class GetSearchResultHandler(
     {
         IContentRepository repository = request.Type switch
         {
-            "threads" => threadRepository,
+            "topics" => topicRepository,
             "comments" => commentRepository,
             _ => throw new ArgumentException($"Unsupported content type: {request.Type}")
         };

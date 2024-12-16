@@ -7,8 +7,8 @@ public class Comment : BaseAuditableEntity
 {
     public string Content { get; set; }
     
-    public Thread Thread { get; set; }
-    public int ThreadId { get; set; }
+    public Topic Topic { get; set; }
+    public int TopicId { get; set; }
     
     [ForeignKey("AuthorId")]
     public User Author { get; set; }

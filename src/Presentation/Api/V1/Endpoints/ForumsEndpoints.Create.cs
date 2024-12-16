@@ -1,5 +1,4 @@
 ﻿using Application.Forums.Commands;
-using Application.Threads.Commands.CreateThread;
 using Ardalis.Result.AspNetCore;
 using FluentValidation;
 using Mapster;
