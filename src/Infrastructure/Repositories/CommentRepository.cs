@@ -28,7 +28,6 @@ public class CommentRepository(ApplicationDbContext context) : ICommentRepositor
 
     public async Task DeleteCommentAsync(Comment comment, CancellationToken cancellationToken)
     {
-        comment.IsDeleted = true;
         comment.Deleted = DateTimeOffset.Now;
         await context.SaveChangesAsync(cancellationToken);
     }

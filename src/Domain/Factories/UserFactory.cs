@@ -15,7 +15,6 @@ public class UserFactory : IUserFactory
             LastLogin = null,
             Created = DateTimeOffset.Now,
             LastModified = DateTimeOffset.Now,
-            IsDeleted = false,
             Deleted = null
         };
     }

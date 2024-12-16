@@ -15,7 +15,6 @@ public class ThreadFactory :IThreadFactory
             AuthorId = authorId,
             Created = DateTimeOffset.Now,
             LastModified = DateTimeOffset.Now,
-            IsDeleted = false,
             Deleted = null
         };
     }

@@ -28,7 +28,6 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
     public async Task DeleteUser(User user, CancellationToken cancellationToken)
     {
-        user.IsDeleted = true;
         user.Deleted = DateTimeOffset.Now;
         user.LastModified = DateTimeOffset.Now;
 

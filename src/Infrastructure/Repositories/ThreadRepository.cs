@@ -42,7 +42,6 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
 
     public async Task DeleteThreadAndComments(Thread thread, CancellationToken cancellationToken)
     {
-        thread.IsDeleted = true;
         thread.Deleted = DateTimeOffset.Now;
         thread.LastModified = DateTimeOffset.Now;
         
@@ -51,7 +50,6 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
         await context.Comments
             .Where(c => c.ThreadId == thread.Id)
             .ExecuteUpdateAsync(c => c
-                    .SetProperty(comment => comment.IsDeleted, true)
                     .SetProperty(comment => comment.Deleted, now),
                 cancellationToken);
         
