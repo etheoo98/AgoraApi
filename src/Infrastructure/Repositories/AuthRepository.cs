@@ -33,4 +33,10 @@ public class AuthRepository(ApplicationDbContext context) : IAuthRepository
         context.RefreshTokens.Update(refreshToken);
         await context.SaveChangesAsync();
     }
+
+    public async Task UpdateLastLoginDateAsync(User user)
+    {
+        user.LastLogin = DateTimeOffset.Now;
+        await context.SaveChangesAsync();
+    }
 }

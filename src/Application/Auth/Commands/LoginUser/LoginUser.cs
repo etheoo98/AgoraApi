@@ -34,6 +34,8 @@ public class LoginUserHandler(IAuthRepository authRepository, ITokenGenerator to
             };
             
             await authRepository.AddRefreshTokenAsync(refreshToken);
+            await authRepository.UpdateLastLoginDateAsync(user);
+            
             var response = new TokenDto(accessToken, refreshToken.Token);
             return Result<TokenDto>.Success(response);
         }

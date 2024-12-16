@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using Domain.Common;
+using Domain.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Thread = Domain.Entities.Thread;
@@ -55,5 +56,83 @@ public class ThreadRepository(ApplicationDbContext context) : IThreadRepository
                 cancellationToken);
         
         await context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<List<ContentDto>> SearchAsync(
+        string? query,
+        DateTimeOffset? updatedAfter,
+        DateTimeOffset? startAfter,
+        DateTimeOffset? startBefore,
+        string? sortBy,
+        string? searchAndOr,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken
+    )
+    {
+        var result = context.Threads.AsQueryable();
+
+        if (!string.IsNullOrEmpty(query) && !string.IsNullOrEmpty(searchAndOr))
+        {
+            var searchTerms = query.Split([' '], StringSplitOptions.RemoveEmptyEntries).Select(term => term.ToLower());
+
+            if (searchAndOr.Equals("and", StringComparison.OrdinalIgnoreCase))
+            {
+                foreach (var term in searchTerms)
+                {
+                    result = result.Where(t =>
+                        t.Title.ToLower().Contains(term) || t.Content.ToLower().Contains(term));
+                }
+            }
+            else if (searchAndOr.Equals("or", StringComparison.OrdinalIgnoreCase))
+            {
+                result = result.Where(t =>
+                    searchTerms.Any(term => t.Title.ToLower().Contains(term) || t.Content.ToLower().Contains(term)));
+            }
+        }
+
+        if (updatedAfter.HasValue)
+        {
+            result = result.Where(t => t.LastModified >= updatedAfter.Value);
+        }
+
+        if (startAfter.HasValue)
+        {
+            result = result.Where(t => t.Created >= startAfter.Value);
+        }
+
+        if (startBefore.HasValue)
+        {
+            result = result.Where(t => t.Created <= startBefore.Value);
+        }
+
+        result = result
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize);
+        
+        result = result.Where(r => r.Deleted == null);
+
+        return await result.Select(t => new ContentDto
+        {
+            Id = t.Id,
+            Title = t.Title,
+            Content = t.Content,
+            Created = t.Created,
+            LastModified = t.LastModified
+        }).ToListAsync(cancellationToken);
+    }
+
+    public async Task<int> CountAsync(string? query, CancellationToken cancellationToken)
+    {
+        var result = context.Threads.AsQueryable();
+        
+        if (!string.IsNullOrEmpty(query))
+        {
+            result = result.Where(t => 
+                t.Title.Contains(query) || 
+                t.Content.Contains(query));
+        }
+        
+        return await result.CountAsync(cancellationToken);
     }
 }

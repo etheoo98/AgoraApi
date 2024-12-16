@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.Repositories;
 
-public interface IThreadRepository
+public interface IThreadRepository : IContentRepository
 {
     Task AddThread(Thread thread);
     Task<Thread?> GetThreadByIdAsync(int id, CancellationToken cancellationToken);

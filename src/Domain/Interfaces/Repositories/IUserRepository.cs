@@ -8,6 +8,6 @@ public interface IUserRepository
     Task<User> UpdateUserAsync(User user, CancellationToken cancellationToken);
     Task<User?> GetUserByIdAsync(int id, CancellationToken cancellationToken);
     Task DeleteUser(User user, CancellationToken cancellationToken);
-    Task<List<User>> SearchUsersAsync(string? searchTerm, int page, int pageSize, CancellationToken cancellationToken);
+    Task<List<User>> SearchUsersAsync(string? searchTerm, DateTimeOffset? joinDate, int page, int pageSize, CancellationToken cancellationToken);
     Task<int> CountUsersAsync(string? searchTerm, CancellationToken cancellationToken);
 }

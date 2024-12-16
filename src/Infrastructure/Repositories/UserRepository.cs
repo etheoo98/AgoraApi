@@ -31,12 +31,16 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         user.IsDeleted = true;
         user.Deleted = DateTimeOffset.Now;
         user.LastModified = DateTimeOffset.Now;
-        
+
         context.Users.Update(user);
         await context.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<List<User>> SearchUsersAsync(string? searchTerm, int page, int pageSize, CancellationToken cancellationToken)
+    public async Task<List<User>> SearchUsersAsync(string? searchTerm,
+        DateTimeOffset? joinDate,
+        int page,
+        int pageSize,
+        CancellationToken cancellationToken)
     {
         var query = context.Users.AsQueryable();
 
@@ -44,11 +48,12 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         {
             query = query.Where(u => u.Username.Contains(searchTerm));
         }
-        
-        return await query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync(cancellationToken);
+
+        query = query.Where(u => u.Deleted == null);
+
+        query = query.Skip((page - 1) * pageSize).Take(pageSize);
+
+        return await query.ToListAsync(cancellationToken);
     }
 
     public async Task<int> CountUsersAsync(string? searchTerm, CancellationToken cancellationToken)
@@ -58,7 +63,7 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
         {
             query = query.Where(u => u.Username.Contains(searchTerm));
         }
-        
+
         return await query.CountAsync(cancellationToken);
     }
 }

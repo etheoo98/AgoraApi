@@ -2,7 +2,7 @@
 
 namespace Domain.Interfaces.Repositories;
 
-public interface ICommentRepository
+public interface ICommentRepository : IContentRepository
 {
     Task AddCommentAsync(Comment comment, CancellationToken cancellationToken);
     Task<Comment?> GetCommentByIdAsync(int id, CancellationToken cancellationToken);
